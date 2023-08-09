@@ -51,9 +51,12 @@ namespace TaskPad
                 if (flag == "Y" | flag=="y")
                 {
                     return true;
+                }else if(flag == "N" | flag == "n")
+                {
+                    return false;
                 }
-                Console.WriteLine("Please Try Again by giving ans correctly (as Y/N)");
-                return false;
+                Console.WriteLine("Try again with proper Y/N");
+                continue;
             }
         }
 
@@ -152,6 +155,57 @@ namespace TaskPad
                 catch
                 {
                     Console.WriteLine("Try giving a proper description again");
+                    continue;
+                }
+            }
+        }
+
+        public DateTime getDate()
+        {
+            Console.WriteLine("Write the due date for the task");
+            while (true)
+            {
+                try
+                {
+                    var date = Console.ReadLine();
+                    if (date != null)
+                    {
+                        return Convert.ToDateTime(date);
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("Try again with a proper date format");
+                    continue;
+                }
+            }
+        }
+
+        public int getPriorityLevel()
+        {
+            Console.WriteLine("Give priority level for the task (1,2,3 -> 1 as highest and 3 as lowest)");
+            while (true)
+            {
+                try
+                {
+                    int pLevel = Convert.ToInt32(Console.ReadLine());
+
+                    if (new int[] { 1, 2, 3 }.Contains(pLevel))
+                    {
+                        return pLevel;
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("Try with proper priority level");
                     continue;
                 }
             }

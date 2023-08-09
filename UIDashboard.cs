@@ -40,7 +40,7 @@ namespace TaskPad
             return getInputs.getOption();
         }
 
-        public void addTask(int id,string uuid,string title,string description)
+        public void addTask(int id,string uuid,string title,string description, DateTime dueD, int priorityL)
         {
             Console.WriteLine($"Task {id} with uid {uuid} added with title : {title} and description : {description}");
         }
@@ -55,6 +55,8 @@ namespace TaskPad
                 Console.WriteLine($"The Title of task is {task.Title}");
                 Console.WriteLine($"The Description of task is {task.Description}");
                 Console.WriteLine($"The CompletedStatus of task is {task.CompletedStatus}");
+                Console.WriteLine($"The Due Date of task is {task.DueDate.ToString("dd/MM/yyyy")}");
+                Console.WriteLine($"The Priority Level of task is {task.PriorityLevel}");
                 Console.WriteLine("-------------------------------------------------------");
             }
         }
@@ -67,10 +69,12 @@ namespace TaskPad
             Console.WriteLine($"The Title of task is {task.Title}");
             Console.WriteLine($"The Description of task is {task.Description}");
             Console.WriteLine($"The CompletedStatus of task is {task.CompletedStatus}");
+            Console.WriteLine($"The Due Date of task is {task.DueDate.ToString("dd/MM/yyyy")}");
+            Console.WriteLine($"The Priority Level of task is {task.PriorityLevel}");
             Console.WriteLine("-------------------------------------------------------");
         }
 
-        public void updateTask(int id,string title,string description, bool CStatus) 
+        public void updateTask(int id, string title, string description, DateTime dueD, int priorityL) 
         {
             Console.WriteLine($"New Task with ID {id} is");
             showSingleTask(id);

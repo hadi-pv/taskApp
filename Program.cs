@@ -6,10 +6,10 @@ namespace TaskPad
     internal class Program
     {
         //Delegates
-        public delegate void AddTaskDel(int id,string uuid,string title,string desc);
+        public delegate void AddTaskDel(int id,string uuid,string title,string desc,DateTime dueD, int priorityL);
         public delegate void showTasksDel();
         public delegate void showSingleTaskDel(int id);
-        public delegate void updateTaskDel(int id,string title,string desc);
+        public delegate void updateTaskDel(int id,string title,string desc, DateTime DueD,int priorityL);
         public delegate void updateTaskStatusDel(int id);
         public delegate void deleteTaskDel(int id);
         public delegate void saveTaskDel(List<TaskItem> tasks);
@@ -29,7 +29,8 @@ namespace TaskPad
 
             showSingleTaskDel showSingleTaskDel = new showSingleTaskDel(uiDashboard.showSingleTask);
 
-            updateTaskDel updateTaskDel = new updateTaskDel(taskManager.UpdateTask);
+            updateTaskDel updateTaskDel = new updateTaskDel(uiDashboard.updateTask);
+            updateTaskDel += taskManager.UpdateTask;
 
             updateTaskStatusDel updateTaskStatusDel = new updateTaskStatusDel(uiDashboard.updateTaskStatus);
             updateTaskStatusDel += taskManager.UpdateTaskStatus;
@@ -49,7 +50,7 @@ namespace TaskPad
                 {
                     case 1:
                         Guid uuid = Guid.NewGuid();
-                        addTaskDel(taskManager.getTaskCount() + 1,uuid.ToString(), getInputs.getTitle(), getInputs.getDescription());
+                        addTaskDel(taskManager.getTaskCount() + 1, uuid.ToString(), getInputs.getTitle(), getInputs.getDescription(), getInputs.getDate(), getInputs.getPriorityLevel());
                         break;
                     case 2:
                         showTasksDel();
@@ -61,7 +62,7 @@ namespace TaskPad
                         updateTaskStatusDel(getInputs.getId());
                         break;
                     case 5:
-                        updateTaskDel(getInputs.getId(), getInputs.getTitle(), getInputs.getDescription());
+                        updateTaskDel(getInputs.getId(), getInputs.getTitle(), getInputs.getDescription(), getInputs.getDate(), getInputs.getPriorityLevel());
                         break;
                     case 6:
                         deleteTaskDel(getInputs.getId());
