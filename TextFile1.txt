@@ -1,0 +1,8 @@
+Builder
+Factory
+
+Bridge
+Facade
+
+Chain of responsibility
+Commander

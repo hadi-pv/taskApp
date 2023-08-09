@@ -1,0 +1,50 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "TaskPad/1.0.0": {
+        "dependencies": {
+          "FileHandler": "1.0.0",
+          "TaskManager": "1.0.0"
+        },
+        "runtime": {
+          "TaskPad.dll": {}
+        }
+      },
+      "FileHandler/1.0.0": {
+        "dependencies": {
+          "TaskManager": "1.0.0"
+        },
+        "runtime": {
+          "FileHandler.dll": {}
+        }
+      },
+      "TaskManager/1.0.0": {
+        "runtime": {
+          "TaskManager.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "TaskPad/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FileHandler/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TaskManager/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
