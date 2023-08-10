@@ -29,19 +29,22 @@ namespace TaskPad
 
         public void NotificationSystem()
         {
-            Console.WriteLine("Important Notifications");
-            Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-");
-            foreach (TaskItem task in taskManager.getNotification())
+            if (!taskManager.notificationFlag)
             {
-                Console.WriteLine();
-                Console.WriteLine($"The Id of task is {task.Id}");
-                Console.WriteLine($"The Title of task is {task.Title}");
-                Console.WriteLine($"The Description of task is {task.Description}");
-                Console.WriteLine($"The CompletedStatus of task is {task.CompletedStatus}");
-                Console.WriteLine($"The Due Date of task is {task.DueDate.ToString("dd/MM/yyyy")}");
-                Console.WriteLine($"The Priority Level of task is {task.PriorityLevel}");
-                Console.WriteLine($"The days remaining is {(task.DueDate - DateTime.Today).TotalDays}");
-                Console.WriteLine("-------------------------------------------------------");
+                Console.WriteLine("Important Notifications");
+                Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-");
+                foreach (TaskItem task in taskManager.getNotification())
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"The Id of task is {task.Id}");
+                    Console.WriteLine($"The Title of task is {task.Title}");
+                    Console.WriteLine($"The Description of task is {task.Description}");
+                    Console.WriteLine($"The CompletedStatus of task is {task.CompletedStatus}");
+                    Console.WriteLine($"The Due Date of task is {task.DueDate.ToString("dd/MM/yyyy")}");
+                    Console.WriteLine($"The Priority Level of task is {task.PriorityLevel}");
+                    Console.WriteLine($"The days remaining is {(task.DueDate - DateTime.Today).TotalDays}");
+                    Console.WriteLine("-------------------------------------------------------");
+                }
             }
 
         }
