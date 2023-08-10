@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "ayBoOgV1g+gbFToA5Z+70Q/HabkSkvhj0nkMnBHQTo69wFq2IcXDf6NqdpNjYQiPU7ZTiBjhJWVDIUqFT+wesw==",
+  "dgSpecHash": "QZfmYZt+XPASUtwa0QCaCjtJFGThrDqxLAfh4s9s+r8/Q+eiucgIymdeYltgFOmlttRHwW3mEXaIRYyGfyx7ag==",
   "success": true,
   "projectFilePath": "C:\\Users\\AbdulHadiPV\\OneDrive - Kongsberg Digital AS\\Desktop\\Training\\TaskPad\\TaskPad.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\AbdulHadiPV\\.nuget\\packages\\consoletables\\2.5.0\\consoletables.2.5.0.nupkg.sha512"
+  ],
   "logs": []
 }

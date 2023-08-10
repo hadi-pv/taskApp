@@ -25,6 +25,7 @@ namespace TaskPad
 
             StartMenu startMenu = new StartMenu(uiDashboard.welcomeMsg);
             startMenu += uiDashboard.NotificationSystem;
+            startMenu += delegate () { Thread.Sleep(3000); };
             startMenu += uiDashboard.showMenu;
 
             AddTaskDel addTaskDel = new AddTaskDel(taskManager.AddTask);

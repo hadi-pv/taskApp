@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ConsoleTables" Version="2.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FileHandler\FileHandler.csproj" />
     <ProjectReference Include="..\TaskManager\TaskManager.csproj" />
   </ItemGroup>

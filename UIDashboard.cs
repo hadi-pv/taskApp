@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TaskManager;
 using static System.Net.Mime.MediaTypeNames;
 using static TaskPad.Program;
+using ConsoleTables;
 
 namespace TaskPad
 {
@@ -31,37 +32,37 @@ namespace TaskPad
         {
             if (!taskManager.notificationFlag)
             {
+                var table=new ConsoleTable("ID","TITLE","PRIORITY LEVEL","DAYS REMAINING");
+                Console.WriteLine();
                 Console.WriteLine("Important Notifications");
                 Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-");
                 foreach (TaskItem task in taskManager.getNotification())
                 {
-                    Console.WriteLine();
-                    Console.WriteLine($"The Id of task is {task.Id}");
-                    Console.WriteLine($"The Title of task is {task.Title}");
-                    Console.WriteLine($"The Description of task is {task.Description}");
-                    Console.WriteLine($"The CompletedStatus of task is {task.CompletedStatus}");
-                    Console.WriteLine($"The Due Date of task is {task.DueDate.ToString("dd/MM/yyyy")}");
-                    Console.WriteLine($"The Priority Level of task is {task.PriorityLevel}");
-                    Console.WriteLine($"The days remaining is {(task.DueDate - DateTime.Today).TotalDays}");
-                    Console.WriteLine("-------------------------------------------------------");
+                    table.AddRow($"{task.Id}",
+                        $"{task.Title}",
+                        $"{task.PriorityLevel}",
+                        $"{(task.DueDate - DateTime.Today).TotalDays}");
                 }
+                table.Write();
+                Console.WriteLine();
             }
 
         }
 
         public void showMenu()
         {
-            Console.WriteLine();
-            Console.WriteLine("Select number of any of the operations below");
-            Console.WriteLine("1.Add a Task");
-            Console.WriteLine("2.View all tasks");
-            Console.WriteLine("3.View a specific task");
-            Console.WriteLine("4.Mark a task as completed");
-            Console.WriteLine("5.Update a task");
-            Console.WriteLine("6.Delete a task");
-            Console.WriteLine("7.Save all data");
-            Console.WriteLine("8.Refresh app and load data again");
-            Console.WriteLine("9.Exit Application");
+            var table = new ConsoleTable("Option Number", "Description");
+            table.AddRow("1","Add a Task");
+            table.AddRow("2","View all tasks");
+            table.AddRow("3","View a specific task");
+            table.AddRow("4","Mark a task as completed");
+            table.AddRow("5","Update a task");
+            table.AddRow("6","Delete a task");
+            table.AddRow("7","Save all data");
+            table.AddRow("8","Refresh app and load data again");
+            table.AddRow("9","Exit Application");
+            table.Write();
+            Console.WriteLine("Select number of any of the operations above : ");
         }
 
         public void addTask(int id,string uuid,string title,string description, DateTime dueD, int priorityL)
@@ -71,31 +72,33 @@ namespace TaskPad
 
         public void showTasks()
         {
-            Console.WriteLine("Showing All Tasks");
+            Console.WriteLine("Showing All Tasks : ");
+            var table = new ConsoleTable("ID", "TITLE", "DESCRIPTION","COMPLETE STATUS","DUE DATE","PRIORITY LEVEL");
             foreach (TaskItem task in taskManager.ViewTask())
             {
-                Console.WriteLine();
-                Console.WriteLine($"The Id of task is {task.Id}");
-                Console.WriteLine($"The Title of task is {task.Title}");
-                Console.WriteLine($"The Description of task is {task.Description}");
-                Console.WriteLine($"The CompletedStatus of task is {task.CompletedStatus}");
-                Console.WriteLine($"The Due Date of task is {task.DueDate.ToString("dd/MM/yyyy")}");
-                Console.WriteLine($"The Priority Level of task is {task.PriorityLevel}");
-                Console.WriteLine("-------------------------------------------------------");
+                table.AddRow($"The Id of task is {task.Id}",
+                    $"The Title of task is {task.Title}",
+                    $"The Description of task is {task.Description}",
+                    $"The CompletedStatus of task is {task.CompletedStatus}",
+                    $"The Due Date of task is {task.DueDate.ToString("dd/MM/yyyy")}",
+                    $"The Priority Level of task is {task.PriorityLevel}");
             }
+            table.Write();
+            Console.WriteLine();
         }
 
         public void showSingleTask(int id)
         {
             TaskItem task = taskManager.ViewTask(id);
+            var table = new ConsoleTable("ID", "TITLE", "DESCRIPTION", "COMPLETE STATUS", "DUE DATE", "PRIORITY LEVEL");
+            table.AddRow($"The Id of task is {task.Id}",
+                $"The Title of task is {task.Title}",
+                $"The Description of task is {task.Description}",
+                $"The CompletedStatus of task is {task.CompletedStatus}",
+                $"The Due Date of task is {task.DueDate.ToString("dd/MM/yyyy")}",
+                $"The Priority Level of task is {task.PriorityLevel}");
+            table.Write();
             Console.WriteLine();
-            Console.WriteLine($"The Id of task is {task.Id}");
-            Console.WriteLine($"The Title of task is {task.Title}");
-            Console.WriteLine($"The Description of task is {task.Description}");
-            Console.WriteLine($"The CompletedStatus of task is {task.CompletedStatus}");
-            Console.WriteLine($"The Due Date of task is {task.DueDate.ToString("dd/MM/yyyy")}");
-            Console.WriteLine($"The Priority Level of task is {task.PriorityLevel}");
-            Console.WriteLine("-------------------------------------------------------");
         }
 
         public void updateTask(int id, string title, string description, DateTime dueD, int priorityL) 
