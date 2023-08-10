@@ -22,9 +22,32 @@ namespace TaskPad
             this.fileClass = fileClass;
         }
 
-        public int showMenu(string name)
+        public void welcomeMsg()
         {
-            Console.WriteLine("Welcome "+name+" to the TODO application.");
+            Console.WriteLine("Welcome " + getInputs.getName() + " to the TODO application.");
+        }
+
+        public void NotificationSystem()
+        {
+            Console.WriteLine("Important Notifications");
+            Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-");
+            foreach (TaskItem task in taskManager.getNotification())
+            {
+                Console.WriteLine();
+                Console.WriteLine($"The Id of task is {task.Id}");
+                Console.WriteLine($"The Title of task is {task.Title}");
+                Console.WriteLine($"The Description of task is {task.Description}");
+                Console.WriteLine($"The CompletedStatus of task is {task.CompletedStatus}");
+                Console.WriteLine($"The Due Date of task is {task.DueDate.ToString("dd/MM/yyyy")}");
+                Console.WriteLine($"The Priority Level of task is {task.PriorityLevel}");
+                Console.WriteLine($"The days remaining is {(task.DueDate - DateTime.Today).TotalDays}");
+                Console.WriteLine("-------------------------------------------------------");
+            }
+
+        }
+
+        public void showMenu()
+        {
             Console.WriteLine();
             Console.WriteLine("Select number of any of the operations below");
             Console.WriteLine("1.Add a Task");
@@ -36,8 +59,6 @@ namespace TaskPad
             Console.WriteLine("7.Save all data");
             Console.WriteLine("8.Refresh app and load data again");
             Console.WriteLine("9.Exit Application");
-
-            return getInputs.getOption();
         }
 
         public void addTask(int id,string uuid,string title,string description, DateTime dueD, int priorityL)
@@ -141,5 +162,6 @@ namespace TaskPad
             Thread.Sleep(1000);
             Environment.Exit(0);
         }
+
     }
 }

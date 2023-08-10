@@ -6,6 +6,7 @@ namespace TaskPad
     internal class Program
     {
         //Delegates
+        public delegate void StartMenu();
         public delegate void AddTaskDel(int id,string uuid,string title,string desc,DateTime dueD, int priorityL);
         public delegate void showTasksDel();
         public delegate void showSingleTaskDel(int id);
@@ -21,6 +22,10 @@ namespace TaskPad
             TaskClass taskManager = new TaskClass(fileClass.readFile());
             getInputs getInputs = new getInputs(taskManager);
             UIDashboard uiDashboard = new UIDashboard(taskManager, getInputs, fileClass);
+
+            StartMenu startMenu = new StartMenu(uiDashboard.welcomeMsg);
+            startMenu += uiDashboard.NotificationSystem;
+            startMenu += uiDashboard.showMenu;
 
             AddTaskDel addTaskDel = new AddTaskDel(taskManager.AddTask);
             addTaskDel += uiDashboard.addTask;
@@ -41,12 +46,12 @@ namespace TaskPad
             saveTaskDel saveTaskDel = new saveTaskDel(uiDashboard.saveAllData);
             saveTaskDel += fileClass.saveAllData;
 
-            Console.WriteLine("Your Name Please");
-            var name = getInputs.getName();
+            
 
             do
             {
-                switch (uiDashboard.showMenu(name))
+                startMenu();
+                switch (getInputs.getOption())
                 {
                     case 1:
                         Guid uuid = Guid.NewGuid();

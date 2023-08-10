@@ -12,6 +12,7 @@ namespace TaskPad
     internal class getInputs
     {
         TaskClass taskManager;
+        string name;
 
         public getInputs(TaskClass taskManager)
         {
@@ -27,7 +28,7 @@ namespace TaskPad
                     var val = Convert.ToInt32(Console.ReadLine());
                     if(val<=0 | val > 9)
                     {
-                        Console.WriteLine("Give correct option");
+                        throw new Exception();
                     }
                     else
                     {
@@ -44,36 +45,64 @@ namespace TaskPad
 
         public bool getFlag()
         {
+            Console.WriteLine("(Give your answer as Y/N or y/n)");
             while (true)
             {
-                Console.WriteLine("(Give your answer as Y/N or y/n)");
-                var flag = Console.ReadLine();
-                if (flag == "Y" | flag=="y")
+                try
                 {
-                    return true;
-                }else if(flag == "N" | flag == "n")
-                {
-                    return false;
+                    var flag = Console.ReadLine();
+                    if (flag == "Y" | flag == "y")
+                    {
+                        return true;
+                    }
+                    else if (flag == "N" | flag == "n")
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+                    
                 }
-                Console.WriteLine("Try again with proper Y/N");
-                continue;
+                catch
+                {
+                    Console.WriteLine("Try again with proper Y/N");
+                    continue;
+                }
             }
         }
 
         public string getName()
         {
-            while (true)
+            if(name == null)
             {
-                var name = Console.ReadLine();
-                if (name != null && Regex.IsMatch(name, @"^[a-zA-Z ]+$"))
+                Console.WriteLine("Your Name Please");
+                while (true)
                 {
-                    return name;
+                    try
+                    {
+                        var name = Console.ReadLine();
+                        if (name != null && Regex.IsMatch(name, @"^[a-zA-Z ]+$"))
+                        {
+                            this.name = name;
+                            return name;
+                        }
+                        else
+                        {
+                            throw new Exception();
+                        }
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Write a real name");
+                        continue;
+                    }
                 }
-                else
-                {
-                    Console.WriteLine("Write a real name");
-                    continue;
-                }
+            }
+            else
+            {
+                return name;
             }
         }
 
@@ -122,8 +151,7 @@ namespace TaskPad
                     }
                     else
                     {
-                        Console.WriteLine("Give a proper title");
-                        continue;
+                        throw new Exception() ;
                     }
                 }
                 catch
@@ -148,8 +176,7 @@ namespace TaskPad
                     }
                     else
                     {
-                        Console.WriteLine("Give a proper description");
-                        continue;
+                        throw new Exception();
                     }
                 }
                 catch
@@ -193,7 +220,7 @@ namespace TaskPad
                 try
                 {
                     int pLevel = Convert.ToInt32(Console.ReadLine());
-
+                    Console.WriteLine(pLevel);
                     if (new int[] { 1, 2, 3 }.Contains(pLevel))
                     {
                         return pLevel;
