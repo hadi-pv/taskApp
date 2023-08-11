@@ -176,6 +176,10 @@
             "ConsoleTables": {
               "target": "Package",
               "version": "[2.5.0, )"
+            },
+            "Spectre.Console": {
+              "target": "Package",
+              "version": "[0.47.0, )"
             }
           },
           "imports": [

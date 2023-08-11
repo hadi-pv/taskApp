@@ -1,5 +1,6 @@
 ﻿using FileHandler;
 using TaskManager;
+using Spectre.Console;
 
 namespace TaskPad
 {
@@ -25,7 +26,6 @@ namespace TaskPad
 
             StartMenu startMenu = new StartMenu(uiDashboard.welcomeMsg);
             startMenu += uiDashboard.NotificationSystem;
-            startMenu += delegate () { Thread.Sleep(3000); };
             startMenu += uiDashboard.showMenu;
 
             AddTaskDel addTaskDel = new AddTaskDel(taskManager.AddTask);
@@ -41,13 +41,11 @@ namespace TaskPad
             updateTaskStatusDel updateTaskStatusDel = new updateTaskStatusDel(uiDashboard.updateTaskStatus);
             updateTaskStatusDel += taskManager.UpdateTaskStatus;
 
-            deleteTaskDel deleteTaskDel = new deleteTaskDel(taskManager.DeleteTask);
-            deleteTaskDel += uiDashboard.deleteTask;
+            deleteTaskDel deleteTaskDel = new deleteTaskDel(uiDashboard.deleteTask);
+            deleteTaskDel += taskManager.DeleteTask;
 
             saveTaskDel saveTaskDel = new saveTaskDel(uiDashboard.saveAllData);
             saveTaskDel += fileClass.saveAllData;
-
-            
 
             do
             {
@@ -56,7 +54,7 @@ namespace TaskPad
                 {
                     case 1:
                         Guid uuid = Guid.NewGuid();
-                        addTaskDel(taskManager.getTaskCount() + 1, uuid.ToString(), getInputs.getTitle(), getInputs.getDescription(), getInputs.getDate(), getInputs.getPriorityLevel());
+                        addTaskDel(taskManager.getLastIndex() + 1, uuid.ToString(), getInputs.getTitle(), getInputs.getDescription(), getInputs.getDate(), getInputs.getPriorityLevel());
                         break;
                     case 2:
                         showTasksDel();

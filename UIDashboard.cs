@@ -8,6 +8,7 @@ using TaskManager;
 using static System.Net.Mime.MediaTypeNames;
 using static TaskPad.Program;
 using ConsoleTables;
+using Spectre.Console;
 
 namespace TaskPad
 {
@@ -25,7 +26,12 @@ namespace TaskPad
 
         public void welcomeMsg()
         {
-            Console.WriteLine("Welcome " + getInputs.getName() + " to the TODO application.");
+            AnsiConsole.Write(
+            new FigletText("TaskAlarm")
+                .Color(Color.DarkSeaGreen4_1));
+            Console.WriteLine();
+            AnsiConsole.Markup(" -> Welcome [green]" + getInputs.getName() + "[/] to the TODO application.".ToUpper());
+            Console.WriteLine();
         }
 
         public void NotificationSystem()
@@ -34,8 +40,8 @@ namespace TaskPad
             {
                 var table=new ConsoleTable("ID","TITLE","PRIORITY LEVEL","DAYS REMAINING");
                 Console.WriteLine();
-                Console.WriteLine("Important Notifications");
-                Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-");
+                AnsiConsole.Markup("  [red]IMPORTANT NOTIFICATION[/]  ");
+                Console.WriteLine();
                 foreach (TaskItem task in taskManager.getNotification())
                 {
                     table.AddRow($"{task.Id}",
@@ -44,7 +50,9 @@ namespace TaskPad
                         $"{(task.DueDate - DateTime.Today).TotalDays}");
                 }
                 table.Write();
+                AnsiConsole.Markup("[red]---------------------------------------------------[/]");
                 Console.WriteLine();
+                Thread.Sleep(1000);
             }
 
         }
@@ -62,26 +70,31 @@ namespace TaskPad
             table.AddRow("8","Refresh app and load data again");
             table.AddRow("9","Exit Application");
             table.Write();
-            Console.WriteLine("Select number of any of the operations above : ");
+            Console.WriteLine();
+            AnsiConsole.Markup("[green] -> Select number of any of the operations above : [/]");
         }
 
         public void addTask(int id,string uuid,string title,string description, DateTime dueD, int priorityL)
         {
-            Console.WriteLine($"Task {id} with uid {uuid} added with title : {title} and description : {description}");
+            Console.WriteLine();
+            Console.WriteLine($" -> Task {id} with uid {uuid} added with title : {title} and description : {description}");
+            Console.WriteLine();
         }
 
         public void showTasks()
         {
-            Console.WriteLine("Showing All Tasks : ");
+            Console.WriteLine();
+            Console.WriteLine(" -> Showing All Tasks : ");
+            Console.WriteLine();
             var table = new ConsoleTable("ID", "TITLE", "DESCRIPTION","COMPLETE STATUS","DUE DATE","PRIORITY LEVEL");
             foreach (TaskItem task in taskManager.ViewTask())
             {
-                table.AddRow($"The Id of task is {task.Id}",
-                    $"The Title of task is {task.Title}",
-                    $"The Description of task is {task.Description}",
-                    $"The CompletedStatus of task is {task.CompletedStatus}",
-                    $"The Due Date of task is {task.DueDate.ToString("dd/MM/yyyy")}",
-                    $"The Priority Level of task is {task.PriorityLevel}");
+                table.AddRow($"{task.Id}",
+                    $"{task.Title}",
+                    $"{task.Description}",
+                    $"{task.CompletedStatus}",
+                    $"{task.DueDate.ToString("dd/MM/yyyy")}",
+                    $"{task.PriorityLevel}");
             }
             table.Write();
             Console.WriteLine();
@@ -91,41 +104,51 @@ namespace TaskPad
         {
             TaskItem task = taskManager.ViewTask(id);
             var table = new ConsoleTable("ID", "TITLE", "DESCRIPTION", "COMPLETE STATUS", "DUE DATE", "PRIORITY LEVEL");
-            table.AddRow($"The Id of task is {task.Id}",
-                $"The Title of task is {task.Title}",
-                $"The Description of task is {task.Description}",
-                $"The CompletedStatus of task is {task.CompletedStatus}",
-                $"The Due Date of task is {task.DueDate.ToString("dd/MM/yyyy")}",
-                $"The Priority Level of task is {task.PriorityLevel}");
+            table.AddRow($"{task.Id}",
+                $"{task.Title}",
+                $"{task.Description}",
+                $"{task.CompletedStatus}",
+                $"{task.DueDate.ToString("dd/MM/yyyy")}",
+                $"{task.PriorityLevel}");
             table.Write();
             Console.WriteLine();
         }
 
         public void updateTask(int id, string title, string description, DateTime dueD, int priorityL) 
         {
-            Console.WriteLine($"New Task with ID {id} is");
+            Console.WriteLine($" -> New Task with ID {id} is");
             showSingleTask(id);
         }
 
         public void updateTaskStatus(int id)
         {
-            Console.WriteLine("This is the task you are trying to complete");
+            Console.WriteLine(" -> This is the task you are trying to complete : ");
             showSingleTask(id);
-            Console.WriteLine("You sure you want to change status");
+            AnsiConsole.Markup("[green]You sure you want to change status[/]");
             if (!getInputs.getFlag())
             {
+                Console.WriteLine();
                 return;
             }
+            Console.WriteLine();
         }
 
         public void deleteTask(int id)
         {
-            Console.WriteLine($"Task with {id} deleted");
+            Console.WriteLine(" -> This is the task you are trying to delete : ");
+            showSingleTask(id);
+            AnsiConsole.Markup("[green]You sure you want to delete this task[/]");
+            if (!getInputs.getFlag())
+            {
+                Console.WriteLine();
+                return;
+            }
+            Console.WriteLine();
         }
 
         public bool showFlag()
         {
-            Console.WriteLine("Do you want to try start a new operation.");
+            AnsiConsole.MarkupLine("[green]Do you want to try start a new operation.[/]");
             if (getInputs.getFlag())
             {
                 Console.Clear();
@@ -139,32 +162,32 @@ namespace TaskPad
 
         public void refreshApp()
         {
-            Console.WriteLine("Refreshing App");
+            Console.WriteLine(" -> Refreshing App");
             Thread.Sleep(1000);
             Console.Clear();
         }
 
         public void saveAllData(List<TaskItem> tasks)
         {
-            Console.WriteLine("Saving all tasks");
+            Console.WriteLine(" -> Saving all tasks");
             Thread.Sleep(1000);
         }
 
         public void ExitApp(saveTaskDel saveTaskDel)
         {
-            if(taskManager.ViewTask().Count != fileClass.readFile().Count)
+            if(taskManager.ViewTask().Count != fileClass.readFile().Count || taskManager.getLastIndex()!= taskManager.ViewTask().Count)
             {
-                Console.WriteLine("Data is not saved, do you want to save data.");
+                AnsiConsole.Markup("[green]Data is not saved, do you want to save data.[/]");
                 if(getInputs.getFlag())
                 {
                     saveTaskDel(taskManager.ViewTask());
                 }
                 else
                 {
-                    Console.WriteLine("Not saving the data.");
+                    Console.WriteLine(" -> Not saving the data.");
                 }
             }
-            Console.WriteLine("You are exiting the app");
+            Console.WriteLine(" -> You are exiting the app");
             Thread.Sleep(1000);
             Environment.Exit(0);
         }

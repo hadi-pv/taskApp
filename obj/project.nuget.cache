@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "QZfmYZt+XPASUtwa0QCaCjtJFGThrDqxLAfh4s9s+r8/Q+eiucgIymdeYltgFOmlttRHwW3mEXaIRYyGfyx7ag==",
+  "dgSpecHash": "6oZ9NjWogsfasOE1MR50tKYnNFHq4984vctR2pOAN0fEb3G00U0ATqJdxWxVLhn+Am0JfxNIUcFdahOJ/366vw==",
   "success": true,
   "projectFilePath": "C:\\Users\\AbdulHadiPV\\OneDrive - Kongsberg Digital AS\\Desktop\\Training\\TaskPad\\TaskPad.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\AbdulHadiPV\\.nuget\\packages\\consoletables\\2.5.0\\consoletables.2.5.0.nupkg.sha512"
+    "C:\\Users\\AbdulHadiPV\\.nuget\\packages\\consoletables\\2.5.0\\consoletables.2.5.0.nupkg.sha512",
+    "C:\\Users\\AbdulHadiPV\\.nuget\\packages\\spectre.console\\0.47.0\\spectre.console.0.47.0.nupkg.sha512",
+    "C:\\Users\\AbdulHadiPV\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512"
   ],
   "logs": []
 }

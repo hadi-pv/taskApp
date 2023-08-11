@@ -19,3 +19,4 @@ C:\Users\AbdulHadiPV\OneDrive - Kongsberg Digital AS\Desktop\Training\TaskPad\ob
 C:\Users\AbdulHadiPV\OneDrive - Kongsberg Digital AS\Desktop\Training\TaskPad\bin\Debug\net6.0\TaskManager.dll
 C:\Users\AbdulHadiPV\OneDrive - Kongsberg Digital AS\Desktop\Training\TaskPad\bin\Debug\net6.0\TaskManager.pdb
 C:\Users\AbdulHadiPV\OneDrive - Kongsberg Digital AS\Desktop\Training\TaskPad\bin\Debug\net6.0\ConsoleTables.dll
+C:\Users\AbdulHadiPV\OneDrive - Kongsberg Digital AS\Desktop\Training\TaskPad\bin\Debug\net6.0\Spectre.Console.dll

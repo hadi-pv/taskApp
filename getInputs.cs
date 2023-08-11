@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using TaskManager;
+using Spectre.Console;
 
 namespace TaskPad
 {
@@ -37,7 +38,8 @@ namespace TaskPad
                 }
                 catch
                 {
-                    Console.WriteLine("Give correct option number");
+                    Console.WriteLine();
+                    AnsiConsole.MarkupLine("[red]Try again with correct option number[/]".ToUpper());
                     continue;
                 }
             }
@@ -45,39 +47,14 @@ namespace TaskPad
 
         public bool getFlag()
         {
-            Console.WriteLine("(Give your answer as Y/N or y/n)");
-            while (true)
-            {
-                try
-                {
-                    var flag = Console.ReadLine();
-                    if (flag == "Y" | flag == "y")
-                    {
-                        return true;
-                    }
-                    else if (flag == "N" | flag == "n")
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        throw new Exception();
-                    }
-                    
-                }
-                catch
-                {
-                    Console.WriteLine("Try again with proper Y/N");
-                    continue;
-                }
-            }
+            return AnsiConsole.Confirm("[green](Give your answer as Y/N or y/n)[/]");
         }
 
         public string getName()
         {
             if(name == null)
             {
-                Console.WriteLine("Your Name Please");
+                AnsiConsole.Markup(" -> Your [green]NAME[/] Please : ");
                 while (true)
                 {
                     try
@@ -86,7 +63,8 @@ namespace TaskPad
                         if (name != null && Regex.IsMatch(name, @"^[a-zA-Z ]+$"))
                         {
                             this.name = name;
-                            return name;
+                            Console.WriteLine();
+                            return name.ToUpper();
                         }
                         else
                         {
@@ -95,7 +73,8 @@ namespace TaskPad
                     }
                     catch
                     {
-                        Console.WriteLine("Write a real name");
+                        Console.WriteLine();
+                        AnsiConsole.MarkupLine("[red]Write a real name.[/]".ToUpper());
                         continue;
                     }
                 }
@@ -110,36 +89,31 @@ namespace TaskPad
         {
             while (true)
             {
-                Console.WriteLine("Please Enter ID number of task");
+                Console.WriteLine();
+                var tasks = taskManager.getIdTitle();
                 try
                 {
-                    var val = Convert.ToInt32(Console.ReadLine());
-                    if (val < 0)
-                    {
-                        Console.WriteLine("Please Give a positive value");
-                        continue;
-                    }
-                    else if (val > taskManager.ViewTask().Count)
-                    {
-                        Console.WriteLine("Give correct ID Number");
-                        continue;
-                    }
-                    else
-                    {
-                        return val;
-                    }
+                    var framework = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .Title(" -> Please select the ID of task")
+                        .PageSize(10)
+                        .MoreChoicesText("[grey](Move up and down to reveal more frameworks)[/]")
+                        .AddChoices(tasks));
+                    return Array.IndexOf(tasks, framework)+1;
                 }
                 catch
                 {
-                    Console.WriteLine("Try again with proper id");
+                    Console.WriteLine();
+                    AnsiConsole.MarkupLine("[red]Try again with proper id.[/]".ToUpper());
                     continue;
                 }
+
             }
         }
 
         public string getTitle()
         {
-            Console.WriteLine("Please give title for the Task");
+            Console.WriteLine(" -> Please give title for the Task");
             while (true)
             {
                 try
@@ -156,7 +130,8 @@ namespace TaskPad
                 }
                 catch
                 {
-                    Console.WriteLine("Try giving a proper title again");
+                    Console.WriteLine();
+                    AnsiConsole.MarkupLine("[red]try again with proper title.[/]".ToUpper());
                     continue;
                 }
             }
@@ -164,7 +139,7 @@ namespace TaskPad
 
         public string getDescription()
         {
-            Console.WriteLine("Please give Description for the Task");
+            Console.WriteLine(" -> Please give Description for the Task");
             while (true)
             {
                 try
@@ -181,7 +156,8 @@ namespace TaskPad
                 }
                 catch
                 {
-                    Console.WriteLine("Try giving a proper description again");
+                    Console.WriteLine();
+                    AnsiConsole.MarkupLine("[red]Try agin with proper description[/]".ToUpper());
                     continue;
                 }
             }
@@ -189,7 +165,7 @@ namespace TaskPad
 
         public DateTime getDate()
         {
-            Console.WriteLine("Write the due date for the task");
+            Console.WriteLine(" -> Write the due date for the task");
             while (true)
             {
                 try
@@ -206,7 +182,8 @@ namespace TaskPad
                 }
                 catch
                 {
-                    Console.WriteLine("Try again with a proper date format");
+                    Console.WriteLine();
+                    AnsiConsole.MarkupLine("[red]Try again with a proper date format[/]".ToUpper());
                     continue;
                 }
             }
@@ -214,13 +191,12 @@ namespace TaskPad
 
         public int getPriorityLevel()
         {
-            Console.WriteLine("Give priority level for the task (1,2,3 -> 1 as highest and 3 as lowest)");
+            Console.WriteLine(" -> Give priority level for the task (1,2,3 -> 1 as highest and 3 as lowest)");
             while (true)
             {
                 try
                 {
                     int pLevel = Convert.ToInt32(Console.ReadLine());
-                    Console.WriteLine(pLevel);
                     if (new int[] { 1, 2, 3 }.Contains(pLevel))
                     {
                         return pLevel;
@@ -232,7 +208,8 @@ namespace TaskPad
                 }
                 catch
                 {
-                    Console.WriteLine("Try with proper priority level");
+                    Console.WriteLine();
+                    AnsiConsole.MarkupLine("[red]Try again with proper priority level[/]".ToUpper());
                     continue;
                 }
             }
