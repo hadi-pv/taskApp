@@ -181,7 +181,7 @@ namespace TaskPad
                 }
                 catch
                 {
-                    AnsiConsole.MarkupLine("[red]Try again with a proper date format[/]".ToUpper());
+                    AnsiConsole.MarkupLine("[red]Try again with a proper date[/]".ToUpper());
                     continue;
                 }
             }
