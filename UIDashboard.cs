@@ -27,9 +27,12 @@ namespace TaskPad
         public void welcomeMsg()
         {
             AnsiConsole.Write(
-            new FigletText("TaskAlarm")
+            new FigletText("    TaskAlarm   ")
                 .Color(Color.DarkSeaGreen4_1));
             Console.WriteLine();
+
+            AnsiConsole.Markup("    ----->  "+ "[DarkSeaGreen4_1]Work hard till you have the luxury to choose and power to influence[/]".ToUpper()+ "  <----- ");
+            Console.WriteLine(); Console.WriteLine();
             AnsiConsole.Markup(" -> Welcome [green]" + getInputs.getName() + "[/] to the TODO application.".ToUpper());
             Console.WriteLine();
         }
@@ -148,7 +151,7 @@ namespace TaskPad
 
         public bool showFlag()
         {
-            AnsiConsole.MarkupLine("[green]Do you want to try start a new operation.[/]");
+            AnsiConsole.MarkupLine("[green]Do you want to start a new operation.[/]");
             if (getInputs.getFlag())
             {
                 Console.Clear();
@@ -173,12 +176,12 @@ namespace TaskPad
             Thread.Sleep(1000);
         }
 
-        public void ExitApp(saveTaskDel saveTaskDel)
+        public void checkSave(saveTaskDel saveTaskDel, Action obj)
         {
-            if(taskManager.ViewTask().Count != fileClass.readFile().Count || taskManager.getLastIndex()!= taskManager.ViewTask().Count)
+            if (taskManager.ViewTask().Count != fileClass.readFile().Count || taskManager.getLastIndex() != taskManager.ViewTask().Count)
             {
                 AnsiConsole.Markup("[green]Data is not saved, do you want to save data.[/]");
-                if(getInputs.getFlag())
+                if (getInputs.getFlag())
                 {
                     saveTaskDel(taskManager.ViewTask());
                 }
@@ -187,6 +190,11 @@ namespace TaskPad
                     Console.WriteLine(" -> Not saving the data.");
                 }
             }
+            obj();
+        }
+
+        public void ExitApp()
+        {
             Console.WriteLine(" -> You are exiting the app");
             Thread.Sleep(1000);
             Environment.Exit(0);

@@ -75,17 +75,17 @@ namespace TaskPad
                         saveTaskDel(taskManager.ViewTask());
                         break;
                     case 8:
-                        uiDashboard.refreshApp();
+                        uiDashboard.checkSave(saveTaskDel, uiDashboard.refreshApp);
                         Main(new string[] { });
                         break;
                     case 9:
-                        uiDashboard.ExitApp(saveTaskDel);
+                        uiDashboard.checkSave(saveTaskDel, uiDashboard.ExitApp);
                         break;
                 }
 
             } while (uiDashboard.showFlag());
 
-            uiDashboard.ExitApp(saveTaskDel);
+            uiDashboard.checkSave(saveTaskDel, uiDashboard.ExitApp );
 
         }
     }
