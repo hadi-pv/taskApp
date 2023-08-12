@@ -38,7 +38,6 @@ namespace TaskPad
                 }
                 catch
                 {
-                    Console.WriteLine();
                     AnsiConsole.MarkupLine("[red]Try again with correct option number[/]".ToUpper());
                     continue;
                 }
@@ -103,7 +102,6 @@ namespace TaskPad
                 }
                 catch
                 {
-                    Console.WriteLine();
                     AnsiConsole.MarkupLine("[red]Try again with proper id.[/]".ToUpper());
                     continue;
                 }
@@ -118,6 +116,7 @@ namespace TaskPad
             {
                 try
                 {
+                    AnsiConsole.Markup(" >> ");
                     var title = Console.ReadLine();
                     if(title!=null && Regex.IsMatch(title, @"^[a-zA-Z0-9-_ ]+$"))
                     {
@@ -130,7 +129,6 @@ namespace TaskPad
                 }
                 catch
                 {
-                    Console.WriteLine();
                     AnsiConsole.MarkupLine("[red]try again with proper title.[/]".ToUpper());
                     continue;
                 }
@@ -144,6 +142,7 @@ namespace TaskPad
             {
                 try
                 {
+                    AnsiConsole.Markup(" >> ");
                     var desc = Console.ReadLine();
                     if (desc!=null && desc.Contains(' '))
                     {
@@ -156,7 +155,6 @@ namespace TaskPad
                 }
                 catch
                 {
-                    Console.WriteLine();
                     AnsiConsole.MarkupLine("[red]Try agin with proper description[/]".ToUpper());
                     continue;
                 }
@@ -170,10 +168,11 @@ namespace TaskPad
             {
                 try
                 {
-                    var date = Console.ReadLine();
-                    if (date != null)
+                    AnsiConsole.Markup(" >> ");
+                    var date = Convert.ToDateTime(Console.ReadLine());
+                    if (date != null && (date - DateTime.Today).TotalDays>=0)
                     {
-                        return Convert.ToDateTime(date);
+                        return date;
                     }
                     else
                     {
@@ -182,7 +181,6 @@ namespace TaskPad
                 }
                 catch
                 {
-                    Console.WriteLine();
                     AnsiConsole.MarkupLine("[red]Try again with a proper date format[/]".ToUpper());
                     continue;
                 }
@@ -196,6 +194,7 @@ namespace TaskPad
             {
                 try
                 {
+                    AnsiConsole.Markup(" >> ");
                     int pLevel = Convert.ToInt32(Console.ReadLine());
                     if (new int[] { 1, 2, 3 }.Contains(pLevel))
                     {
@@ -208,7 +207,6 @@ namespace TaskPad
                 }
                 catch
                 {
-                    Console.WriteLine();
                     AnsiConsole.MarkupLine("[red]Try again with proper priority level[/]".ToUpper());
                     continue;
                 }

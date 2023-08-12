@@ -1,3 +1,61 @@
+
+Starting App :
+	uiDashboard.welcomeMsg
+	uiDashboard.NotificationSystem
+	uiDashboard.showMenu
+
+Add Task: (ID,Title,Desc,Due Date,Priority Level)
+	taskManager.AddTask
+	uiDashboard.addTask
+
+Show All Tasks:
+	uiDashboard.showTasks
+
+Show Single Task: (ID)
+	uiDashboard.showSingleTask
+
+Update Task: (ID,Title,Desc,Due Date,Priority Level)
+	uiDashboard.updateTask
+
+Update status: 
+	uiDashboard.updateTaskStatus
+	taskManager.UpdateTaskStatus
+
+Delete Task:
+	uiDashboard.deleteTask
+	taskManager.DeleteTask
+
+Save Task:
+	uiDashboard.saveAllData
+	fileClass.saveAllData
+
+Exiting or Refreshing App: (Check if data is saved)
+	uiDashboard.checkSave(saveTaskDel, uiDashboard.refreshApp);
+	uiDashboard.checkSave(saveTaskDel, uiDashboard.ExitApp )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Builder
 Factory
 

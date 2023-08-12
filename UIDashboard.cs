@@ -29,7 +29,6 @@ namespace TaskPad
             AnsiConsole.Write(
             new FigletText("    TaskAlarm   ")
                 .Color(Color.DarkSeaGreen4_1));
-            Console.WriteLine();
 
             AnsiConsole.Markup("    ----->  "+ "[DarkSeaGreen4_1]Work hard till you have the luxury to choose and power to influence[/]".ToUpper()+ "  <----- ");
             Console.WriteLine(); Console.WriteLine();
@@ -43,8 +42,8 @@ namespace TaskPad
             {
                 var table=new ConsoleTable("ID","TITLE","PRIORITY LEVEL","DAYS REMAINING");
                 Console.WriteLine();
-                AnsiConsole.Markup("  [red]IMPORTANT NOTIFICATION[/]  ");
-                Console.WriteLine();
+                AnsiConsole.MarkupLine("  [yellow]IMPORTANT NOTIFICATION[/]  ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 foreach (TaskItem task in taskManager.getNotification())
                 {
                     table.AddRow($"{task.Id}",
@@ -53,8 +52,9 @@ namespace TaskPad
                         $"{(task.DueDate - DateTime.Today).TotalDays}");
                 }
                 table.Write();
-                AnsiConsole.Markup("[red]---------------------------------------------------[/]");
+                AnsiConsole.Markup("[yellow]---------------------------------------------------[/]");
                 Console.WriteLine();
+                Console.ResetColor();
                 Thread.Sleep(1000);
             }
 
@@ -99,7 +99,7 @@ namespace TaskPad
                     $"{task.DueDate.ToString("dd/MM/yyyy")}",
                     $"{task.PriorityLevel}");
             }
-            table.Write();
+            table.Write(Format.Minimal);
             Console.WriteLine();
         }
 
@@ -178,8 +178,9 @@ namespace TaskPad
 
         public void checkSave(saveTaskDel saveTaskDel, Action obj)
         {
-            if (taskManager.ViewTask().Count != fileClass.readFile().Count || taskManager.getLastIndex() != taskManager.ViewTask().Count)
+            if (taskManager.madeChanges)
             {
+                Console.WriteLine();
                 AnsiConsole.Markup("[green]Data is not saved, do you want to save data.[/]");
                 if (getInputs.getFlag())
                 {
