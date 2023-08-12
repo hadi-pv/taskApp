@@ -109,7 +109,7 @@ namespace TaskPad
             }
         }
 
-        public string getTitle()
+        public string getTitle(int id)
         {
             Console.WriteLine(" -> Please give title for the Task");
             while (true)
@@ -118,9 +118,13 @@ namespace TaskPad
                 {
                     AnsiConsole.Markup(" >> ");
                     var title = Console.ReadLine();
-                    if(title!=null && Regex.IsMatch(title, @"^[a-zA-Z0-9-_ ]+$"))
+                    if(title!="" && Regex.IsMatch(title, @"^[a-zA-Z0-9-_ ]+$"))
                     {
                         return title;
+                    }
+                    else if (title == "" && id!=0)
+                    {
+                        return taskManager.ViewTask(id).Title;
                     }
                     else
                     {
@@ -135,7 +139,7 @@ namespace TaskPad
             }
         }
 
-        public string getDescription()
+        public string getDescription(int id)
         {
             Console.WriteLine(" -> Please give Description for the Task");
             while (true)
@@ -144,9 +148,13 @@ namespace TaskPad
                 {
                     AnsiConsole.Markup(" >> ");
                     var desc = Console.ReadLine();
-                    if (desc!=null && desc.Contains(' '))
+                    if (desc!="" && desc.Contains(' '))
                     {
                         return desc;
+                    }
+                    else if (desc == "" && id!=0)
+                    {
+                        return taskManager.ViewTask(id).Description;
                     }
                     else
                     {
@@ -161,7 +169,7 @@ namespace TaskPad
             }
         }
 
-        public DateTime getDate()
+        public DateTime getDate(int id)
         {
             Console.WriteLine(" -> Write the due date for the task");
             while (true)
@@ -169,10 +177,14 @@ namespace TaskPad
                 try
                 {
                     AnsiConsole.Markup(" >> ");
-                    var date = Convert.ToDateTime(Console.ReadLine());
-                    if (date != null && (date - DateTime.Today).TotalDays>=0)
+                    var date = Console.ReadLine();
+                    if (date != "" && (Convert.ToDateTime(date) - DateTime.Today).TotalDays>=0)
                     {
-                        return date;
+                        return Convert.ToDateTime(date);
+                    }
+                    else if (date == "" && id!=0)
+                    {
+                        return taskManager.ViewTask(id).DueDate;
                     }
                     else
                     {
@@ -187,7 +199,7 @@ namespace TaskPad
             }
         }
 
-        public int getPriorityLevel()
+        public int getPriorityLevel(int id)
         {
             Console.WriteLine(" -> Give priority level for the task (1,2,3 -> 1 as highest and 3 as lowest)");
             while (true)
@@ -195,10 +207,14 @@ namespace TaskPad
                 try
                 {
                     AnsiConsole.Markup(" >> ");
-                    int pLevel = Convert.ToInt32(Console.ReadLine());
-                    if (new int[] { 1, 2, 3 }.Contains(pLevel))
+                    var pLevel = Console.ReadLine();
+                    if (pLevel!="" && new int[] { 1, 2, 3 }.Contains(Convert.ToInt32(pLevel)))
                     {
-                        return pLevel;
+                        return Convert.ToInt32(pLevel);
+                    }
+                    else if (pLevel == "" && id!=0)
+                    {
+                        return taskManager.ViewTask(id).PriorityLevel;
                     }
                     else
                     {

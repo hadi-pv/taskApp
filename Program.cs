@@ -54,7 +54,7 @@ namespace TaskPad
                 {
                     case 1:
                         Guid uuid = Guid.NewGuid();
-                        addTaskDel(taskManager.getLastIndex() + 1, uuid.ToString(), getInputs.getTitle(), getInputs.getDescription(), getInputs.getDate(), getInputs.getPriorityLevel());
+                        addTaskDel(taskManager.getLastIndex() + 1, uuid.ToString(), getInputs.getTitle(0), getInputs.getDescription(0), getInputs.getDate(0), getInputs.getPriorityLevel(0));
                         break;
                     case 2:
                         showTasksDel();
@@ -66,7 +66,8 @@ namespace TaskPad
                         updateTaskStatusDel(getInputs.getId());
                         break;
                     case 5:
-                        updateTaskDel(getInputs.getId(), getInputs.getTitle(), getInputs.getDescription(), getInputs.getDate(), getInputs.getPriorityLevel());
+                        int id = getInputs.getId();
+                        updateTaskDel(id, getInputs.getTitle(id), getInputs.getDescription(id), getInputs.getDate(id), getInputs.getPriorityLevel(id));
                         break;
                     case 6:
                         deleteTaskDel(getInputs.getId());
