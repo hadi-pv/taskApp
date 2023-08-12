@@ -67,6 +67,8 @@ namespace TaskPad
                         break;
                     case 5:
                         int id = getInputs.getId();
+                        AnsiConsole.MarkupLine("[yellow] >> Leave the attribute empty if you dont want to update[/]");
+                        Console.WriteLine();
                         updateTaskDel(id, getInputs.getTitle(id), getInputs.getDescription(id), getInputs.getDate(id), getInputs.getPriorityLevel(id));
                         break;
                     case 6:
